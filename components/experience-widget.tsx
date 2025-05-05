@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { PlusCircle, Trash2 } from "lucide-react"
+import { Textarea } from "@/components/ui/textarea"
 
 interface WorkExperience {
   id: string
@@ -15,7 +16,7 @@ interface WorkExperience {
   endDate: string
   title: string
   company: string
-  bulletPoints: string[]
+  bulletPoints: string // Changed from string[] to string
 }
 
 export function ExperienceWidget() {
@@ -26,11 +27,8 @@ export function ExperienceWidget() {
       endDate: "Present",
       title: "Senior Product Manager",
       company: "Tech Innovations Inc.",
-      bulletPoints: [
-        "Led product strategy and development for enterprise SaaS solutions",
-        "Managed a team of 12 and increased revenue by 35%",
-        "Implemented agile methodologies that improved delivery time by 40%",
-      ],
+      bulletPoints:
+        "• Led product strategy and development for enterprise SaaS solutions\n• Managed a team of 12 and increased revenue by 35%\n• Implemented agile methodologies that improved delivery time by 40%",
     },
     {
       id: "2",
@@ -38,11 +36,8 @@ export function ExperienceWidget() {
       endDate: "Dec 2019",
       title: "Product Manager",
       company: "Digital Solutions Corp.",
-      bulletPoints: [
-        "Oversaw the development and launch of mobile applications",
-        "Collaborated with cross-functional teams to deliver projects on time and within budget",
-        "Conducted user research that led to a 25% increase in user satisfaction",
-      ],
+      bulletPoints:
+        "• Oversaw the development and launch of mobile applications\n• Collaborated with cross-functional teams to deliver projects on time and within budget\n• Conducted user research that led to a 25% increase in user satisfaction",
     },
   ])
 
@@ -53,23 +48,11 @@ export function ExperienceWidget() {
     company: "",
   })
 
-  const [newBulletPoint, setNewBulletPoint] = useState("")
-  const [tempBulletPoints, setTempBulletPoints] = useState<string[]>([])
+  const [newBulletPoints, setNewBulletPoints] = useState("")
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setNewExperience((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const addBulletPoint = () => {
-    if (newBulletPoint.trim()) {
-      setTempBulletPoints((prev) => [...prev, newBulletPoint])
-      setNewBulletPoint("")
-    }
-  }
-
-  const removeBulletPoint = (index: number) => {
-    setTempBulletPoints((prev) => prev.filter((_, i) => i !== index))
   }
 
   const addExperience = () => {
@@ -81,7 +64,7 @@ export function ExperienceWidget() {
     const newExp = {
       id: Date.now().toString(),
       ...newExperience,
-      bulletPoints: tempBulletPoints,
+      bulletPoints: newBulletPoints,
     }
 
     setExperiences((prev) => [...prev, newExp])
@@ -91,7 +74,7 @@ export function ExperienceWidget() {
       title: "",
       company: "",
     })
-    setTempBulletPoints([])
+    setNewBulletPoints("")
   }
 
   const removeExperience = (id: string) => {
@@ -123,11 +106,7 @@ export function ExperienceWidget() {
                 {exp.startDate} - {exp.endDate} [{exp.title}] {exp.company}
               </h3>
 
-              <ul className="mt-2 space-y-1 list-disc list-inside text-sm text-muted-foreground">
-                {exp.bulletPoints.map((point, index) => (
-                  <li key={index}>{point}</li>
-                ))}
-              </ul>
+              <div className="mt-2 text-sm text-muted-foreground whitespace-pre-line">{exp.bulletPoints}</div>
             </div>
           ))}
 
@@ -178,33 +157,20 @@ export function ExperienceWidget() {
             </div>
 
             {/* Bullet Points Section */}
-            <div className="space-y-3">
-              <Label>Bullet Points</Label>
-
-              {tempBulletPoints.length > 0 && (
-                <ul className="space-y-2">
-                  {tempBulletPoints.map((point, index) => (
-                    <li key={index} className="flex items-center gap-2">
-                      <div className="flex-1 p-2 bg-muted rounded-md text-sm">{point}</div>
-                      <Button variant="ghost" size="icon" onClick={() => removeBulletPoint(index)}>
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                      </Button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              <div className="flex gap-2">
-                <Input
-                  value={newBulletPoint}
-                  onChange={(e) => setNewBulletPoint(e.target.value)}
-                  placeholder="Add a bullet point"
-                  className="flex-1"
-                />
-                <Button onClick={addBulletPoint} type="button">
-                  Add
-                </Button>
-              </div>
+            <div className="space-y-2 col-span-1 sm:col-span-2">
+              <Label htmlFor="bulletPoints">Bullet Points</Label>
+              <Textarea
+                id="bulletPoints"
+                value={newBulletPoints}
+                onChange={(e) => setNewBulletPoints(e.target.value)}
+                placeholder="• Add your bullet points here
+• Start each point with a bullet (•)
+• Press Enter for a new line"
+                className="min-h-[150px]"
+              />
+              <p className="text-xs text-muted-foreground">
+                Start each line with a bullet point (•) and press Enter for a new line
+              </p>
             </div>
 
             <Button onClick={addExperience} className="w-full sm:w-auto mt-2">

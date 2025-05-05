@@ -3,10 +3,10 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { CollapsibleSection } from "./collapsible-section"
 
 interface GuestbookEntry {
   id: string
@@ -77,65 +77,59 @@ export function GuestbookWidget() {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Guestbook</CardTitle>
-        <CardDescription>Leave a comment for future visitors</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-6">
-          {/* Add Comment Form */}
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <label htmlFor="comment" className="text-sm font-medium">
-                  Your Comment
-                </label>
-                <span
-                  className={`text-xs ${newComment.length > maxCharacters * 0.8 ? "text-amber-500" : "text-muted-foreground"}`}
-                >
-                  {newComment.length}/{maxCharacters}
-                </span>
-              </div>
-              <Textarea
-                id="comment"
-                value={newComment}
-                onChange={handleCommentChange}
-                placeholder="Share your thoughts (max 200 characters)"
-                className={`resize-none ${newComment.length > maxCharacters ? "border-red-500" : ""}`}
-                rows={3}
-              />
+    <CollapsibleSection title="Guestbook" emoji="✍🏼">
+      <div className="space-y-6">
+        {/* Add Comment Form */}
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <div className="flex justify-between items-center">
+              <label htmlFor="comment" className="text-sm font-medium">
+                Your Comment
+              </label>
+              <span
+                className={`text-xs ${newComment.length > maxCharacters * 0.8 ? "text-amber-500" : "text-muted-foreground"}`}
+              >
+                {newComment.length}/{maxCharacters}
+              </span>
             </div>
-
-            {error && (
-              <Alert variant="destructive" className="py-2">
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-
-            <Button onClick={addComment} className="w-full sm:w-auto">
-              Sign Guestbook
-            </Button>
+            <Textarea
+              id="comment"
+              value={newComment}
+              onChange={handleCommentChange}
+              placeholder="Share your thoughts (max 200 characters)"
+              className={`resize-none ${newComment.length > maxCharacters ? "border-red-500" : ""}`}
+              rows={3}
+            />
           </div>
 
-          {/* Existing Comments */}
-          <div className="space-y-4">
-            <h3 className="font-medium">Recent Comments</h3>
-            {entries.length > 0 ? (
-              <div className="space-y-4">
-                {entries.map((entry) => (
-                  <div key={entry.id} className="p-4 bg-muted/50 rounded-lg">
-                    <p className="text-sm">{entry.comment}</p>
-                    <p className="text-xs text-muted-foreground mt-2 font-mono">{formatTimestamp(entry.timestamp)}</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground">No comments yet. Be the first to sign the guestbook!</p>
-            )}
-          </div>
+          {error && (
+            <Alert variant="destructive" className="py-2">
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+
+          <Button onClick={addComment} className="w-full sm:w-auto">
+            Sign Guestbook
+          </Button>
         </div>
-      </CardContent>
-    </Card>
+
+        {/* Existing Comments */}
+        <div className="space-y-4">
+          <h3 className="font-medium">Recent Comments</h3>
+          {entries.length > 0 ? (
+            <div className="space-y-4">
+              {entries.map((entry) => (
+                <div key={entry.id} className="p-4 bg-muted/50 rounded-lg">
+                  <p className="text-sm">{entry.comment}</p>
+                  <p className="text-xs text-muted-foreground mt-2 font-mono">{formatTimestamp(entry.timestamp)}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground">No comments yet. Be the first to sign the guestbook!</p>
+          )}
+        </div>
+      </div>
+    </CollapsibleSection>
   )
 }

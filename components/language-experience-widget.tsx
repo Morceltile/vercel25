@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CollapsibleSection } from "./collapsible-section"
 
 interface Language {
   name: string
@@ -33,24 +33,19 @@ export function LanguageExperienceWidget() {
   )
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Language Experience</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            {leftLanguages.map((language) => (
-              <LanguageBar key={language.name} language={language} />
-            ))}
-          </div>
-          <div>
-            {rightLanguages.map((language) => (
-              <LanguageBar key={language.name} language={language} />
-            ))}
-          </div>
+    <CollapsibleSection title="Language Experience" emoji="📚">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          {leftLanguages.map((language) => (
+            <LanguageBar key={language.name} language={language} />
+          ))}
         </div>
-      </CardContent>
-    </Card>
+        <div>
+          {rightLanguages.map((language) => (
+            <LanguageBar key={language.name} language={language} />
+          ))}
+        </div>
+      </div>
+    </CollapsibleSection>
   )
 }

@@ -54,6 +54,7 @@ const config = {
         },
         blue: {
           700: "#004D99", // Marine blue color
+          900: "#002147", // Night blue color
         },
       },
       borderRadius: {

@@ -16,7 +16,7 @@ export default function ProfilePage() {
       <div className="container mx-auto py-8 px-4">
         <header className="mb-8 text-center">
           <h1 className="text-3xl font-bold mb-2">Bienvenido to Mo's Vercel Page</h1>
-          <p className="text-muted-foreground">
+          <p className="text-blue-700">
             <span>To quote Linkin Park: </span>
             <span className="italic">"What I've Done"</span>
             <span> see below </span>
@@ -26,7 +26,7 @@ export default function ProfilePage() {
               href="https://www.linkedin.com/in/guessuwantsummo/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-700 hover:underline"
+              className="underline hover:no-underline"
             >
               Find me on LinkedIn
             </Link>

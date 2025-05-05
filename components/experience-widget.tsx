@@ -23,21 +23,21 @@ export function ExperienceWidget() {
   const [experiences, setExperiences] = useState<WorkExperience[]>([
     {
       id: "1",
-      startDate: "Jan 2020",
-      endDate: "Present",
-      title: "Senior Product Manager",
-      company: "Tech Innovations Inc.",
+      startDate: "11/2022",
+      endDate: "02/2025",
+      title: "Senior Customer Success Manager",
+      company: "BoostUp.ai",
       bulletPoints:
-        "• Led product strategy and development for enterprise SaaS solutions\n• Managed a team of 12 and increased revenue by 35%\n• Implemented agile methodologies that improved delivery time by 40%",
+        "• Focused on full customer lifecycle from onboarding, to solution design, implementation and adoption\n• Specialized in US Tech & StartUp sector\n• Ran regular EBRs with Executive Stakeholders (Chief Revenue Officers, Chief Customer Officers, Head of Sales Operations)\n• Served as Voice of Customer to internal BoostUp product team, updating JTBD and prioritzed feature requests\n• Supported contract renewal negotation which was led by BoostUp VP",
     },
     {
       id: "2",
-      startDate: "Mar 2018",
-      endDate: "Dec 2019",
-      title: "Product Manager",
-      company: "Digital Solutions Corp.",
+      startDate: "08/2015",
+      endDate: "05/2021",
+      title: "Customer Success Manager",
+      company: "Salesforce.com",
       bulletPoints:
-        "• Oversaw the development and launch of mobile applications\n• Collaborated with cross-functional teams to deliver projects on time and within budget\n• Conducted user research that led to a 25% increase in user satisfaction",
+        "• Spent three years at the Irish EMEA HQ in Dublin, serving the entire EMEA and DACH region\n• Went through various customer-facing roles from Success Plan Onboarding to Cloud Specialist\n• Implemented customer process enhancements to drive adoption\n• Strong alignment with regional DACH sales leaders to ensure 90% Success Rate for new customer onboarding\n• Spent three years in the Swiss Francophone region serving the Financial Services industry team\n• Owned full customer lifecycle and contract renewals for USD3M AOV portfolio wich included Swiss Wealth Managers and CPG companies like Richemont & Philipp Morris International",
     },
   ])
 

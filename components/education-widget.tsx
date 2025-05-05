@@ -53,21 +53,21 @@ export function EducationWidget() {
   const [educations, setEducations] = useState<Education[]>([
     {
       id: "1",
-      startDate: "Sep 2016",
-      endDate: "May 2018",
+      startDate: "09/2021",
+      endDate: "09/2022",
       degree: "Master of Business Administration",
-      university: "Harvard Business School",
-      city: "Boston",
-      country: "USA",
+      university: "EGADE Business School",
+      city: "Mexico City",
+      country: "Mexico",
     },
     {
       id: "2",
-      startDate: "Sep 2010",
-      endDate: "May 2014",
-      degree: "Bachelor of Science in Computer Science",
-      university: "MIT",
-      city: "Cambridge",
-      country: "USA",
+      startDate: "08/2012",
+      endDate: "06/2015",
+      degree: "Bachelor of Business Administration",
+      university: "ICN Business School",
+      city: "Nancy",
+      country: "France",
     },
   ])
 

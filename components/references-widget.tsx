@@ -1,38 +1,54 @@
 "use client"
 
 import type React from "react"
+import Link from "next/link"
 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { PlusCircle, Trash2 } from "lucide-react"
+import { PlusCircle, Trash2, Linkedin } from "lucide-react"
 
 interface Reference {
   id: string
   firstName: string
   lastName: string
+  title?: string
   mobile: string
   email: string
+  linkedinUrl?: string // Added LinkedIn URL field
 }
 
 export function ReferencesWidget() {
   const [references, setReferences] = useState<Reference[]>([
     {
       id: "1",
-      firstName: "John",
-      lastName: "Smith",
-      mobile: "+1 (555) 123-4567",
-      email: "john.smith@example.com",
+      firstName: "Jeff",
+      lastName: "Saenger",
+      title: "Former VP Customer Success at BoostUp",
+      mobile: "+1 (925) 457-4644",
+      email: "norcalfan.j@gmail.com",
+      linkedinUrl: "https://www.linkedin.com/in/jeff-saenger/",
+    },
+    {
+      id: "2",
+      firstName: "Lucie",
+      lastName: "Maillet",
+      title: "Former VP Customer Success at Salesforce",
+      mobile: "+41 78 688 56 29",
+      email: "luciem24@hotmail.com",
+      linkedinUrl: "https://www.linkedin.com/in/luciemaillet/",
     },
   ])
 
   const [newReference, setNewReference] = useState<Omit<Reference, "id">>({
     firstName: "",
     lastName: "",
+    title: "",
     mobile: "",
     email: "",
+    linkedinUrl: "",
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,8 +71,10 @@ export function ReferencesWidget() {
     setNewReference({
       firstName: "",
       lastName: "",
+      title: "",
       mobile: "",
       email: "",
+      linkedinUrl: "",
     })
   }
 
@@ -88,8 +106,25 @@ export function ReferencesWidget() {
                       <Trash2 className="h-4 w-4 text-destructive" />
                       <span className="sr-only">Remove reference</span>
                     </Button>
-                    <div className="font-medium">
-                      {reference.firstName} {reference.lastName}
+                    <div className="font-medium flex items-center gap-2">
+                      {reference.linkedinUrl ? (
+                        <>
+                          <Link
+                            href={reference.linkedinUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-700 hover:underline flex items-center"
+                          >
+                            {reference.firstName} {reference.lastName}
+                          </Link>
+                          <Linkedin className="h-4 w-4 text-blue-700" />
+                        </>
+                      ) : (
+                        <>
+                          {reference.firstName} {reference.lastName}
+                        </>
+                      )}
+                      {reference.title && <span>[{reference.title}]</span>}
                     </div>
                     <div className="text-sm text-muted-foreground mt-1">
                       <div>{reference.mobile}</div>
@@ -125,6 +160,16 @@ export function ReferencesWidget() {
                   placeholder="Enter last name"
                 />
               </div>
+              <div className="space-y-2 sm:col-span-2">
+                <Label htmlFor="title">Title</Label>
+                <Input
+                  id="title"
+                  name="title"
+                  value={newReference.title}
+                  onChange={handleInputChange}
+                  placeholder="e.g., Former VP Customer Success at Company"
+                />
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="mobile">Mobile Number</Label>
                 <Input
@@ -144,6 +189,16 @@ export function ReferencesWidget() {
                   value={newReference.email}
                   onChange={handleInputChange}
                   placeholder="Enter email address"
+                />
+              </div>
+              <div className="space-y-2 sm:col-span-2">
+                <Label htmlFor="linkedinUrl">LinkedIn URL</Label>
+                <Input
+                  id="linkedinUrl"
+                  name="linkedinUrl"
+                  value={newReference.linkedinUrl}
+                  onChange={handleInputChange}
+                  placeholder="e.g., https://www.linkedin.com/in/username/"
                 />
               </div>
             </div>

@@ -22,10 +22,17 @@ export function DogsWidget() {
   const [photos, setPhotos] = useState<DogPhoto[]>([
     {
       id: "1",
-      url: "/placeholder.svg?height=300&width=300",
-      name: "Max",
-      startYear: "2015",
-      endYear: "Present",
+      url: "/images/atax-airdale.jpeg",
+      name: "Atax | Airdale",
+      startYear: "2000",
+      endYear: "2013",
+    },
+    {
+      id: "2",
+      url: "/images/jonny-doberman.jpeg",
+      name: "Jonny | Doberman",
+      startYear: "2014",
+      endYear: "2023",
     },
   ])
 
@@ -77,7 +84,7 @@ export function DogsWidget() {
 
       // Revoke the URL to prevent memory leaks
       const photoToRemove = prev.find((photo) => photo.id === id)
-      if (photoToRemove && !photoToRemove.url.includes("placeholder")) {
+      if (photoToRemove && !photoToRemove.url.includes("/images/")) {
         URL.revokeObjectURL(photoToRemove.url)
       }
 
@@ -99,11 +106,17 @@ export function DogsWidget() {
       <CardContent>
         <div className="space-y-6">
           {/* Photo Gallery */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {photos.map((photo) => (
               <div key={photo.id} className="relative group">
                 <div className="aspect-square relative overflow-hidden rounded-lg border">
-                  <Image src={photo.url || "/placeholder.svg"} alt={photo.name} fill className="object-cover" />
+                  <Image
+                    src={photo.url || "/placeholder.svg"}
+                    alt={photo.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                   <Button
                     variant="destructive"
                     size="icon"
@@ -113,7 +126,7 @@ export function DogsWidget() {
                     <X className="h-4 w-4" />
                   </Button>
                 </div>
-                <p className="mt-1 text-center font-medium text-sm">
+                <p className="mt-2 text-center font-medium">
                   {photo.name} [{photo.startYear} - {photo.endYear}]
                 </p>
               </div>

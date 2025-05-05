@@ -6,6 +6,7 @@ import { ReferencesWidget } from "@/components/references-widget"
 import { GuestbookWidget } from "@/components/guestbook-widget"
 import { LanguageExperienceWidget } from "@/components/language-experience-widget"
 import { LearnedWidget } from "@/components/learned-widget"
+import { TestSection } from "@/components/test-section"
 
 export default function ProfilePage() {
   return (
@@ -43,6 +44,8 @@ export default function ProfilePage() {
         <DogsWidget />
 
         <GuestbookWidget />
+
+        <TestSection />
       </div>
     </div>
   )

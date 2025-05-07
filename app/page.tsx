@@ -6,6 +6,7 @@ import { ReferencesWidget } from "@/components/references-widget"
 import { GuestbookWidget } from "@/components/guestbook-widget"
 import { LanguageExperienceWidget } from "@/components/language-experience-widget"
 import { LearnedWidget } from "@/components/learned-widget"
+import { CommentSection } from "@/components/comment-section"
 
 export default function ProfilePage() {
   return (
@@ -16,17 +17,17 @@ export default function ProfilePage() {
       <div className="container mx-auto py-8 px-4">
         <header className="mb-8 text-center">
           <h1 className="text-3xl font-bold mb-2">Bienvenido to Mo's Vercel Page</h1>
-          <p className="text-blue-700">
-            <span>To quote Linkin Park: </span>
-            <span className="italic">"What I've Done"</span>
-            <span> see below </span>
+          <p>
+            <span className="text-blue-900">To quote Linkin Park - </span>
+            <span className="italic text-blue-900">"What I've Done"</span>
+            <span className="text-blue-900"> - see below </span>
             <span>👇🏼</span>
-            <span> | </span>
+            <span className="text-blue-700"> | </span>
             <Link
               href="https://www.linkedin.com/in/guessuwantsummo/"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:no-underline"
+              className="text-blue-700 underline hover:no-underline font-bold"
             >
               Find me on LinkedIn
             </Link>
@@ -47,6 +48,8 @@ export default function ProfilePage() {
           <DogsWidget />
 
           <GuestbookWidget />
+
+          <CommentSection />
         </div>
       </div>
     </div>
